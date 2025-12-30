@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Student,Course,Enrollment
-from .serializer import StudentSerializer,CourseSerializer,EnrollmentReadSerializer,EnrollmentCreateSerializer
+from .serializer import StudentSerializer,CourseSerializer,EnrollmentReadSerializer,EnrollmentCreateSerializer,EnrollmentDropSerializer
 # ---- Importing filter serializers here
 from .serializer import StudentEnrollSerializer,CourseEnrollSerializer
 
@@ -79,6 +79,22 @@ def create_enrollment(req):
         enrolls.save()
         return Response(enrolls.data,status=status.HTTP_201_CREATED)
     return Response(enrolls.errors,status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','PUT'])
+def change_status(req,pk):
+    enroll = get_object_or_404(Enrollment,pk=pk)
+    
+    if req.method == 'GET':
+        enrolls = EnrollmentReadSerializer(enroll)
+        return Response(enrolls.data)
+    
+    if req.method == 'PUT':
+        enrolls = EnrollmentDropSerializer(enroll,data=req.data)
+        if enrolls.is_valid():
+            enrolls.save()
+            return Response(enrolls.data,status=status.HTTP_201_CREATED)
+        return Response(enrolls.errors,status=status.HTTP_400_BAD_REQUEST)
+    
 
 @api_view(['GET'])
 def enrollements_by_course(req,pk):
