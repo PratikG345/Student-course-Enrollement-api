@@ -47,3 +47,8 @@ class StudentEnrollSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = ['course','enrolled_at','status']
+
+class EnrollmentDropSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Enrollment
+        fields = ['status']
