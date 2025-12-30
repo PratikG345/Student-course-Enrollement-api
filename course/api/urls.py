@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import all_students,student_detail,create_student
 from .views import all_courses,course_detail,create_course
-from .views import all_enrollments,enrollment_detail,create_enrollment,enrollements_by_course,enrollments_by_name
+from .views import all_enrollments,enrollment_detail,create_enrollment,enrollements_by_course,enrollments_by_name,change_status
 urlpatterns = [
     # ------- Students Urls ----------------
     path('students/',all_students,name="all_students"),
@@ -19,4 +19,5 @@ urlpatterns = [
     path('enrollments/',all_enrollments,name="all_enrollments"),
     path('enrollments/<int:pk>',enrollment_detail,name="enrollment_detail"),
     path('enrollments/add',create_enrollment,name="create_enrollment"),
+    path('enrollments/<int:pk>/status',change_status,name="change_status")
 ]
