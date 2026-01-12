@@ -4,7 +4,7 @@ from .views import all_courses,course_detail,create_course
 from .views import all_enrollments,enrollment_detail,create_enrollment,enrollements_by_course,enrollments_by_name,change_status
 urlpatterns = [
     # ------- Students Urls ----------------
-    path('students/',all_students,name="all_students"),
+    path('',all_students,name="all_students"),
     path('students/<int:pk>',student_detail,name="student_detail"),
     path('students/add',create_student,name="create_student"),
     path('students/<int:pk>/enrollments/',enrollments_by_name,name="enrollments_by_name"),
