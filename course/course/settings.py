@@ -77,15 +77,10 @@ WSGI_APPLICATION = 'course.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'course',
-        'USER':'postgres',
-        'PASSWORD':'pratik1642',
-        'PORT':5432,
-    }
+    'default': dj_database_url.config(conn_max_age=600)
 }
 
 
